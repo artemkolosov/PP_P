@@ -1,32 +1,26 @@
 package jm.task.core.jdbc;
 
-import jm.task.core.jdbc.dao.UserDao;
-import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
-
-import static jm.task.core.jdbc.util.Util.getConnection;
+import jm.task.core.jdbc.service.UserService;
+import jm.task.core.jdbc.service.UserServiceImpl;
+import java.sql.SQLException;
 
 public class Main {
-    public static void main(String[] args) {
-        // реализуйте алгоритм здесь
-        // реализуйте алгоритм здесь
-        // реализуйте алгоритм здесь
-        //синхронизация с рабочим компьютером
-        //настройка зависимостей
-
-        getConnection();
-        UserDao userDao = new UserDaoJDBCImpl();
-
-        userDao.createUsersTable();
-
-        userDao.saveUser("Name1", "LastName1", (byte) 20);
-        userDao.saveUser("Name2", "LastName2", (byte) 25);
-        userDao.saveUser("Name3", "LastName3", (byte) 31);
-        userDao.saveUser("Name4", "LastName4", (byte) 38);
-
-        userDao.removeUserById(1);
-        userDao.getAllUsers();
-        userDao.cleanUsersTable();
-        userDao.dropUsersTable();
-
+    public static void main(String[] args) throws SQLException {
+        //собственное тестирование
+        UserService userService = new UserServiceImpl();
+        userService.createUsersTable();
+        userService.cleanUsersTable();
+        userService.saveUser("Джимми", "Хендрикс", (byte) 27);
+        userService.saveUser("Дженис", "Джоплин", (byte) 27);
+        userService.saveUser("Джим", "Моррисон", (byte) 27);
+        userService.saveUser("Курт", "Кобейн", (byte) 27);
+        userService.removeUserById(3);
+        userService.removeUserById(1);
+        userService.saveUser("Эми", "Уайнхаус", (byte) 27);
+        System.out.println(userService.getAllUsers());
+        userService.cleanUsersTable();
+        userService.dropUsersTable();
     }
+
+
 }
